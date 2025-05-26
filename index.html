@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Controle de Empréstimos</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <h1>Controle de Empréstimos</h1>
+
+  <form id="emprestimo-form">
+    <input type="text" id="equipamento" placeholder="Equipamento" required>
+    <input type="text" id="responsavel" placeholder="Responsável" required>
+    <input type="date" id="dataRetirada" required>
+    <input type="date" id="dataDevolucao" required>
+    <button type="submit">Registrar Empréstimo</button>
+  </form>
+
+  <h2>Histórico</h2>
+  <ul id="historico"></ul>
+
+  <script src="app.js"></script>
+</body>
+</html>
