@@ -5,171 +5,182 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Controle de Empréstimos</title>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
 
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
 
+    h1 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 30px;
+    }
 
-  
-body {
-  font-family: 'Open Sans', sans-serif;
-  margin: 0;
-  padding: 20px;
-  background-color: #f5f5f5;
-}
+    form {
+      display: grid;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
 
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
+    label {
+      font-weight: 600;
+      color: #555;
+    }
 
-h1 {
-  color: #333;
-  text-align: center;
-  margin-bottom: 30px;
-}
+    input, select {
+      padding: 10px;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
 
-form {
-  display: grid;
-  gap: 15px;
-  margin-bottom: 40px;
-}
+    input:focus, select:focus {
+      outline: none;
+      border-color: #4CAF50;
+    }
 
-label {
-  font-weight: 600;
-  color: #555;
-}
+    button {
+      padding: 12px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+    }
 
-input, select {
-  padding: 10px;
-  border: 2px solid #ddd;
-  border-radius: 5px;
-  font-size: 16px;
-}
+    button:hover {
+      background-color: #45a049;
+    }
 
-input:focus, select:focus {
-  outline: none;
-  border-color: #4CAF50;
-}
+    .loan-item {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      background: white;
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+    }
 
-button {
-  padding: 12px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 600;
-}
+    .alert-pending {
+      border-left: 5px solid #ffa500;
+    }
 
-button:hover {
-  background-color: #45a049;
-}
+    .alert-overdue {
+      border-left: 5px solid #ff4444;
+    }
 
-.loan-item {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 20px;
-  background: white;
-  display: flex;
-  align-items: flex-start;
-  gap: 15px;
-}
+    .status-container {
+      flex-shrink: 0;
+    }
 
-.alert-pending {
-  border-left: 5px solid #ffa500;
-}
+    .status-icon {
+      font-size: 20px;
+      font-weight: bold;
+    }
 
-.alert-overdue {
-  border-left: 5px solid #ff4444;
-}
+    .loan-details {
+      flex: 1;
+      display: flex;
+      gap: 15px;
+    }
 
-.status-container {
-  flex-shrink: 0;
-}
+    .loan-image img {
+      max-width: 100px;
+      max-height: 100px;
+      object-fit: cover;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
 
-.status-icon {
-  font-size: 20px;
-  font-weight: bold;
-}
+    .loan-content {
+      flex: 1;
+      line-height: 1.6;
+    }
 
-.loan-details {
-  flex: 1;
-  display: flex;
-  gap: 15px;
-}
+    .devolucao {
+      background-color: #e8f5e8;
+      padding: 8px;
+      margin: 5px 0;
+      border-radius: 4px;
+      border-left: 3px solid #4CAF50;
+    }
 
-.loan-image img {
-  max-width: 100px;
-  max-height: 100px;
-  object-fit: cover;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-}
+    .devolver-parcial, .devolver-tudo {
+      background-color: #2196F3;
+      margin-right: 10px;
+      margin-top: 10px;
+    }
 
-.loan-content {
-  flex: 1;
-  line-height: 1.6;
-}
+    .devolver-parcial:hover, .devolver-tudo:hover {
+      background-color: #1976D2;
+    }
 
-.devolucao {
-  background-color: #e8f5e8;
-  padding: 8px;
-  margin: 5px 0;
-  border-radius: 4px;
-  border-left: 3px solid #4CAF50;
-}
+    .excluir {
+      background-color: #f44336;
+      margin-top: 10px;
+    }
 
-.devolver-parcial, .devolver-tudo {
-  background-color: #2196F3;
-  margin-right: 10px;
-  margin-top: 10px;
-}
+    .excluir:hover {
+      background-color: #d32f2f;
+    }
 
-.devolver-parcial:hover, .devolver-tudo:hover {
-  background-color: #1976D2;
-}
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+    }
 
-.excluir {
-  background-color: #f44336;
-  margin-top: 10px;
-}
+    .modal-content {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+      max-height: 80%;
+      object-fit: contain;
+    }
 
-.excluir:hover {
-  background-color: #d32f2f;
-}
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.9);
-}
-
-.modal-content {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 700px;
-  max-height: 80%;
-  object-fit: contain;
-}
-
-.close
-
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <h1>Controle de Empréstimos</h1>
-
     <form id="emprestimo-form">
       <label for="categoria">Categoria:</label>
       <select id="categoria" required>
@@ -179,19 +190,19 @@ button:hover {
         <option value="Microfone">Microfone</option>
         <option value="Outros">Outros</option>
       </select>
-  
+        
       <label for="nomeItem">Nome do Item:</label>
       <input type="text" id="nomeItem" placeholder="Nome do Item" required>
-  
+        
       <label for="detalhes">Detalhes (ex.: tamanho, modelo):</label>
       <input type="text" id="detalhes" placeholder="Outras informações, ex.: tamanho, modelo">
-  
+        
       <label for="quantidade">Quantidade:</label>
       <input type="number" id="quantidade" min="1" placeholder="Quantidade" required>
-  
+        
       <label for="quemPegou">Quem pegou emprestado:</label>
       <input type="text" id="quemPegou" placeholder="Digite o nome de quem pegou emprestado" required>
-  
+        
       <label for="emprestouTeatro">Quem do teatro emprestou:</label>
       <select id="emprestouTeatro" required>
         <option value="">Selecione</option>
@@ -201,248 +212,22 @@ button:hover {
         <option value="luis">Luis</option>
         <option value="julio">Julio</option>
       </select>
-
+      
       <label for="imagem">Imagem (opcional):</label>
       <input type="file" id="imagem" accept="image/*">
-  
+        
       <button type="submit">Emprestar</button>
     </form>
-  
+      
     <h2>Histórico de Empréstimos</h2>
     <div id="historico"></div>
   </div>
-
+  
   <div id="modal" class="modal">
     <span class="close">&times;</span>
     <img class="modal-content" id="modalImg" src="">
   </div>
-  
-  <script>
-    function getCurrentDate() {
-      const date = new Date();
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const day = String(date.getDate()).padStart(2, '0');
-      return `${year}-${month}-${day}`;
-    }
     
-    const form = document.getElementById('emprestimo-form');
-    const historico = document.getElementById('historico');
-    const funcionariosPermitidos = ['mauricio', 'cirilo', 'silvana', 'luis', 'julio'];
-    
-    const modal = document.getElementById("modal");
-    const modalImg = document.getElementById("modalImg");
-    const modalClose = document.querySelector(".modal .close");
-    
-    modalClose.onclick = function() {
-      modal.style.display = "none";
-    }
-
-    modal.onclick = function(event) {
-      if (event.target === modal) {
-        modal.style.display = "none";
-      }
-    }
-    
-    let emprestimos = JSON.parse(localStorage.getItem('emprestimos')) || [];
-    
-    function render() {
-      historico.innerHTML = '';
-      emprestimos.forEach((item, index) => {
-        const div = document.createElement('div');
-        div.classList.add('loan-item');
-    
-        const totalDevolvido = item.devolucoes.reduce((sum, d) => sum + Number(d.quantidade), 0);
-        const quantidadeRestante = item.quantidade - totalDevolvido;
-    
-        const today = new Date();
-        const loanDate = new Date(item.dataRetirada);
-        const diffDays = Math.floor((today - loanDate) / (1000 * 60 * 60 * 24));
-
-        if (quantidadeRestante > 0) {
-          if (diffDays > 30) {
-            div.classList.add('alert-overdue');
-          } else {
-            div.classList.add('alert-pending');
-          }
-        }
-    
-        let statusIcon = "";
-        if (quantidadeRestante > 0) {
-          statusIcon = diffDays > 30 
-            ? '<span title="Em atraso" class="status-icon" style="color: red;">&#9888;</span>'
-            : '<span title="Pendente devolução" class="status-icon" style="color: goldenrod;">&#9888;</span>';
-        } else {
-          statusIcon = '<span title="Devolvido" class="status-icon" style="color: green;">&#10003;</span>';
-        }
-    
-        let contentHTML = `<strong>Categoria:</strong> ${item.categoria}<br>`;
-        contentHTML += `<strong>Item:</strong> ${item.nomeItem}<br>`;
-        if (item.detalhes) {
-          contentHTML += `<strong>Detalhes:</strong> ${item.detalhes}<br>`;
-        }
-        contentHTML += `<strong>Quantidade Total:</strong> ${item.quantidade}<br>`;
-        contentHTML += `<strong>Quem pegou emprestado:</strong> ${item.quemPegou}<br>`;
-        contentHTML += `<strong>Quem do teatro emprestou:</strong> ${item.emprestouTeatro}<br>`;
-        contentHTML += `<strong>Data de Empréstimo:</strong> ${item.dataRetirada}<br>`;
-        contentHTML += `<strong>Quantidade Devolvida:</strong> ${totalDevolvido}<br>`;
-        contentHTML += `<strong>Quantidade Restante:</strong> ${quantidadeRestante}<br>`;
-
-        if (item.devolucoes.length > 0) {
-          let devolucoesHTML = '<strong>Histórico de Devoluções:</strong><br>';
-          item.devolucoes.forEach((d) => {
-            devolucoesHTML += `<div class="devolucao">Devolução de ${d.quantidade} em ${d.data} – <strong>Responsável que pegou de volta:</strong> ${d.devolvidoPor}</div>`;
-          });
-          contentHTML += devolucoesHTML;
-        }
-   
-        let imageHTML = "";
-        if (item.imagem) {
-          imageHTML = `<div class="loan-image"><img src="${item.imagem}" alt="Imagem do item"></div>`;
-        }
-    
-        const textContainerHTML = `<div class="loan-content">${contentHTML}</div>`;
-    
-        div.innerHTML =
-          '<div class="status-container">' + statusIcon + "</div>" +
-          '<div class="loan-details">' + imageHTML + textContainerHTML + "</div>";
-    
-        if (item.imagem) {
-          const imgElem = div.querySelector('.loan-image img');
-          imgElem.style.cursor = "pointer";
-          imgElem.addEventListener('click', () => {
-            modalImg.src = item.imagem;
-            modal.style.display = "block";
-          });
-        }
-    
-        if (quantidadeRestante > 0) {
-          const btnContainer = document.createElement('div');
-    
-          const devolverParcialBtn = document.createElement('button');
-          devolverParcialBtn.classList.add('devolver-parcial');
-          devolverParcialBtn.textContent = 'Devolver Parcial';
-          devolverParcialBtn.addEventListener('click', () => {
-            let qtd = prompt(`Digite a quantidade a devolver (máximo ${quantidadeRestante}):`);
-            if (qtd !== null) {
-              qtd = Number(qtd);
-              if (qtd > 0 && qtd <= quantidadeRestante) {
-                let funcionarioRetorno = prompt("Digite o nome do funcionário que pegou de volta (mauricio, cirilo, silvana, luis, julio):");
-                if (funcionarioRetorno) {
-                  funcionarioRetorno = funcionarioRetorno.toLowerCase().trim();
-                  if (funcionariosPermitidos.indexOf(funcionarioRetorno) === -1) {
-                    alert("Nome inválido. Utilize um dos nomes: mauricio, cirilo, silvana, luis, julio.");
-                    return;
-                  }
-                  item.devolucoes.push({
-                    data: getCurrentDate(),
-                    quantidade: qtd,
-                    devolvidoPor: funcionarioRetorno
-                  });
-                  localStorage.setItem('emprestimos', JSON.stringify(emprestimos));
-                  render();
-                }
-              } else {
-                alert('Quantidade inválida.');
-              }
-            }
-          });
-          btnContainer.appendChild(devolverParcialBtn);
-    
-          const devolverTudoBtn = document.createElement('button');
-          devolverTudoBtn.classList.add('devolver-tudo');
-          devolverTudoBtn.textContent = 'Devolver Tudo';
-          devolverTudoBtn.addEventListener('click', () => {
-            if (confirm(`Confirma a devolução de todos os ${quantidadeRestante} itens pendentes?`)) {
-              let funcionarioRetorno = prompt("Digite o nome do funcionário que pegou de volta (mauricio, cirilo, silvana, luis, julio):");
-              if (funcionarioRetorno) {
-                funcionarioRetorno = funcionarioRetorno.toLowerCase().trim();
-                if (funcionariosPermitidos.indexOf(funcionarioRetorno) === -1) {
-                  alert("Nome inválido. Utilize um dos nomes: mauricio, cirilo, silvana, luis, julio.");
-                  return;
-                }
-                item.devolucoes.push({
-                  data: getCurrentDate(),
-                  quantidade: quantidadeRestante,
-                  devolvidoPor: funcionarioRetorno
-                });
-                localStorage.setItem('emprestimos', JSON.stringify(emprestimos));
-                render();
-              }
-            }
-          });
-          btnContainer.appendChild(devolverTudoBtn);
-
-          div.querySelector('.loan-content').appendChild(btnContainer);
-        } else {
-          div.querySelector('.loan-content').innerHTML += `<br><strong>Status:</strong> Devolvido Integralmente`;
-        }
-
-        const excluirBtn = document.createElement('button');
-        excluirBtn.classList.add('excluir');
-        excluirBtn.textContent = 'Excluir';
-        excluirBtn.addEventListener('click', () => {
-          const senha = prompt('Digite a senha para excluir:');
-          if (senha === 'teatro') {
-            if (confirm('Tem certeza que deseja excluir este registro?')) {
-              emprestimos.splice(index, 1);
-              localStorage.setItem('emprestimos', JSON.stringify(emprestimos));
-              render();
-            }
-          } else {
-            alert('Senha incorreta. A exclusão foi cancelada.');
-          }
-        });
-
-        div.querySelector('.loan-content').appendChild(excluirBtn);
-        historico.appendChild(div);
-      });
-    }
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-    
-      const categoria = document.getElementById('categoria').value;
-      const nomeItem = document.getElementById('nomeItem').value;
-      const detalhes = document.getElementById('detalhes').value;
-      const quantidade = Number(document.getElementById('quantidade').value);
-      const quemPegou = document.getElementById('quemPegou').value;
-      const emprestouTeatro = document.getElementById('emprestouTeatro').value;
-      const dataRetirada = getCurrentDate();
-      const imagemInput = document.getElementById('imagem');
-    
-      const criarEmprestimo = (imagemDataURL = "") => {
-        const novoEmprestimo = {
-          categoria,
-          nomeItem,
-          detalhes,
-          quantidade,
-          quemPegou,
-          emprestouTeatro,
-          dataRetirada,
-          devolucoes: [],
-          imagem: imagemDataURL
-        };
-    
-        emprestimos.push(novoEmprestimo);
-        localStorage.setItem('emprestimos', JSON.stringify(emprestimos));
-        form.reset();
-        render();
-      };
-    
-      if (imagemInput.files && imagemInput.files[0]) {
-        const file = imagemInput.files[0];
-        const reader = new FileReader();
-        reader.onload = function(event) {
-          criarEmprestimo(event.target.result);
-        };
-        reader.readAsDataURL(file);
-      } else {
-        criarEmprestimo();
-      }
-    });
-
-    render();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
