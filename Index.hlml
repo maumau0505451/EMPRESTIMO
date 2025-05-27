@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Controle de Empréstimos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: grid;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #555;
+    }
+
+    input, select {
+      padding: 10px;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #4CAF50;
+    }
+
+    button {
+      padding: 12px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .loan-item {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      background: white;
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    .alert-pending {
+      border-left: 5px solid #ffa500;
+    }
+
+    .alert-overdue {
+      border-left: 5px solid #ff4444;
+    }
+
+    .status-container {
+      flex-shrink: 0;
+    }
+
+    .status-icon {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .loan-details {
+      flex: 1;
+      display: flex;
+      gap: 15px;
+    }
+
+    .loan-image img {
+      max-width: 100px;
+      max-height: 100px;
+      object-fit: cover;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+
+    .loan-content {
+      flex: 1;
+      line-height: 1.6;
+    }
+
+    .devolucao {
+      background-color: #e8f5e8;
+      padding: 8px;
+      margin: 5px 0;
+      border-radius: 4px;
+      border-left: 3px solid #4CAF50;
+    }
+
+    .devolver-parcial, .devolver-tudo {
+      background-color: #2196F3;
+      margin-right: 10px;
+      margin-top: 10px;
+    }
+
+    .devolver-parcial:hover, .devolver-tudo:hover {
+      background-color: #1976D2;
+    }
+
+    .excluir {
+      background-color: #f44336;
+      margin-top: 10px;
+    }
+
+    .excluir:hover {
+      background-color: #d32f2f;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+      max-height: 80%;
+      object-fit: contain;
+    }
+
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Controle de Empréstimos</h1>
+    <form id="emprestimo-form">
+      <label for="categoria">Categoria:</label>
+      <select id="categoria" required>
+        <option value="">Selecione</option>
+        <option value="Cabos">Cabos</option>
+        <option value="Caixa de Som">Caixa de Som</option>
+        <option value="Microfone">Microfone</option>
+        <option value="Outros">Outros</option>
+      </select>
+        
+      <label for="nomeItem">Nome do Item:</label>
+      <input type="text" id="nomeItem" placeholder="Nome do Item" required>
+        
+      <label for="detalhes">Detalhes (ex.: tamanho, modelo):</label>
+      <input type="text" id="detalhes" placeholder="Outras informações, ex.: tamanho, modelo">
+        
+      <label for="quantidade">Quantidade:</label>
+      <input type="number" id="quantidade" min="1" placeholder="Quantidade" required>
+        
+      <label for="quemPegou">Quem pegou emprestado:</label>
+      <input type="text" id="quemPegou" placeholder="Digite o nome de quem pegou emprestado" required>
+        
+      <label for="emprestouTeatro">Quem do teatro emprestou:</label>
+      <select id="emprestouTeatro" required>
+        <option value="">Selecione</option>
+        <option value="mauricio">Mauricio</option>
+        <option value="cirilo">Cirilo</option>
+        <option value="silvana">Silvana</option>
+        <option value="luis">Luis</option>
+        <option value="julio">Julio</option>
+      </select>
+      
+      <label for="imagem">Imagem (opcional):</label>
+      <input type="file" id="imagem" accept="image/*">
+        
+      <button type="submit">Emprestar</button>
+    </form>
+
+    <button id="exportar">Exportar para JSON</button>
+    <button id="importarBtn">Importar JSON</button>
+    <input type="file" id="importarInput" accept=".json" style="display:none">
+
+    <h2>Histórico de Empréstimos</h2>
+    <div id="historico"></div>
+  </div>
+  
+  <div id="modal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImg" src="">
+  </div>
+    
+  <script src="script.js"></script>
+</body>
+</html>
