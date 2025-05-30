@@ -1,0 +1,29 @@
+{
+  "name": "Controle de Empréstimos",
+  "short_name": "Empréstimos",
+  "description": "Sistema de controle de empréstimos do teatro",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f5f5f5",
+  "theme_color": "#4CAF50",
+  "orientation": "portrait-primary",
+  "scope": "./",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "business"],
+  "dir": "ltr",
+  "prefer_related_applications": false
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Controle de Empréstimos</title>
+  <link rel="manifest" href="manifest.json">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Controle de Empréstimos</h1>
+
+    <form id="emprestimo-form">
+      <label for="categoria">Categoria:</label>
+      <select id="categoria" required>
+        <option value="">Selecione</option>
+        <option value="Cabos">Cabos</option>
+        <option value="Caixa de Som">Caixa de Som</option>
+        <option value="Microfone">Microfone</option>
+        <option value="Outros">Outros</option>
+      </select>
+
+      <label for="nomeItem">Nome do Item:</label>
+      <input type="text" id="nomeItem" placeholder="Nome do Item" required>
+
+      <label for="detalhes">Detalhes (ex.: tamanho, modelo):</label>
+      <input type="text" id="detalhes" placeholder="Outras informações, ex.: tamanho, modelo">
+
+      <label for="quantidade">Quantidade:</label>
+      <input type="number" id="quantidade" min="1" placeholder="Quantidade" required>
+
+      <label for="quemPegou">Quem pegou emprestado:</label>
+      <input type="text" id="quemPegou" placeholder="Digite o nome de quem pegou emprestado" required>
+
+      <label for="emprestouTeatro">Quem do teatro emprestou:</label>
+      <select id="emprestouTeatro" required>
+        <option value="">Selecione</option>
+        <option value="mauricio">Mauricio</option>
+        <option value="cirilo">Cirilo</option>
+        <option value="silvana">Silvana</option>
+        <option value="luis">Luis</option>
+        <option value="julio">Julio</option>
+      </select>
+
+      <label for="imagem">Imagem (opcional):</label>
+      <input type="file" id="imagem" accept="image/*">
+
+      <button type="submit">Emprestar</button>
+    </form>
+
+    <button id="verAntigos" class="secundario">Ver Todos os Históricos</button>
+    <button id="voltarAtivos" class="secundario" style="display:none;">Ver Somente Ativos</button>
+    <button id="botaoImprimir" class="secundario">Imprimir Empréstimo Selecionado</button>
+
+    <h2>Histórico de Empréstimos</h2>
+    <select id="selecionarImpressao" style="width: 100%; margin-bottom: 20px;"></select>
+    <div id="historico"></div>
+  </div>
+
+  <div id="modal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImg" src="">
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./service-worker.js')
+        .then(() => console.log("SW registrado"))
+        .catch((err) => console.log("SW erro:", err));
+    }
+  </script>
+</body>
+</html>
